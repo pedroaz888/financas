@@ -8,6 +8,7 @@ def calcula_total(obj, campo):
         total += getattr(i, campo)
     return total
 
+
 def financial_balance():
     gastos_essenciais = Valores.objects.filter(data__month=datetime.now().month).filter(tipo='S').filter(categoria__essencial=True)
     gastos_nao_essenciais = Valores.objects.filter(data__month=datetime.now().month).filter(tipo='S').filter(categoria__essencial=False)

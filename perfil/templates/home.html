@@ -41,6 +41,20 @@
                     </div>
                 </a>
             </div>
+            <div class="col-md-3">
+                <a style="text-decoration: none; color:yellow;" href="{% url 'dashboard' %}">
+                    <div class="card">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <span  class="fonte-destaque">Dashboard</span>
+                            </div>
+                            <div class="col-md">
+                                <img class="icone-setas" src="{% static 'perfil/img/bar.png' %}">
+                            </div>
+                        </div> 
+                    </div>
+                </a>
+            </div>
         </div>
         <br>
         <br>
@@ -84,14 +98,14 @@
                             <div class="saldo">
                                 <span class="fonte-destaque">Saldo mensal</span>
                                 <br>
-                                <span class="font-light">R$ 0.000,00</span>
+                                <span class="font-light">R$ {{ total_contas }}</span>
                             </div>
                         </div>
                         <div class="col-md">
                             <div class="despesa">
                                 <span class="fonte-destaque">Despesa mensal</span>
                                 <br>
-                                <span class="font-light">R$ 0.000,00</span>
+                                <span class="font-light">R$ {{ total_saidas }}</span>
                             </div>
 
                         </div>
@@ -99,9 +113,9 @@
                     </div>
                     <hr class="hr-borda">
                     <span class="fonte-destaque">Total livre</span>
-                    <span class="font-light negativo">R$ 0.000,00</span>
+                    <span class="font-light negativo">R$ {{total_livre}}</span>
                     <hr class="hr-borda">
-                    <a href="#" class="botao-principal">Gerenciar dados mensais</a>
+                    <a href="{%  url 'definir_contas' %}" class="botao-principal">Gerenciar dados mensais</a>
                 </div>
             </div>
 
@@ -152,10 +166,10 @@
                     <hr class="hr-borda">
 
                     <span class="fonte-destaque">Próximas do vencimento</span>
-                    <span class="fonte-light">3 contas próximas do vencimento</span>
+                    <span class="fonte-light">contas: {{ contas_proximas_contagem }}</span>
                     <br>
                     <span class="fonte-destaque negativo">Vencidas</span>
-                    <span class="fonte-light">0 contas vencidas</span>
+                    <span class="fonte-light">contas: {{ contas_vencidas_contagem }}</span>
 
                     <hr class="hr-borda">
                     

@@ -6,6 +6,11 @@ from django.contrib.messages import constants
 from .utils import calcula_total, financial_balance
 from extrato.models import Valores
 from datetime import datetime
+from contas.models import ContaPaga,ContaPagar
+
+
+
+
 def home(request):
     valores = Valores.objects.filter(data__month=datetime.now().month)
     entradas = valores.filter(tipo='E')
@@ -14,18 +19,37 @@ def home(request):
     total_entradas = calcula_total(entradas, 'valor')
     total_saidas = calcula_total(saidas, 'valor')
 
+    total_livre = total_entradas - total_saidas
+
     contas = Conta.objects.all()
     
     total_contas = calcula_total(contas, 'valor')
 
     percentual_gastos_essenciais, percentual_gastos_nao_essenciais = financial_balance()
 
+    MES_ATUAL = datetime.now().month
+    DIA_ATUAL = datetime.now().day
+
+    contas_pagar = ContaPagar.objects.all()
+    contas_paga = ContaPaga.objects.all()
+
+    # Contas pagas no mês atual
+    contas_pagas_contagem = contas_paga.filter(data_pagamento__month=MES_ATUAL).count()
+  
+    contas_vencidas_contagem = contas_pagar.filter(dia_pagamento__lt=DIA_ATUAL).exclude(id__in=[contas_pagas_contagem]).count()
+    contas_proximas_contagem = contas_pagar.filter(dia_pagamento__lte=DIA_ATUAL + 5, dia_pagamento__gt=DIA_ATUAL).exclude(id__in=[contas_pagas_contagem]).count()
+
+
     return render(request, 'home.html', {'contas': contas, 
                                          'total_contas': total_contas,
                                          'total_entradas': total_entradas,
                                          'total_saidas': total_saidas,
+                                         'total_livre': total_livre,
                                          'percentual_gastos_essenciais': int(percentual_gastos_essenciais),
-                                         'percentual_gastos_nao_essenciais': int(percentual_gastos_nao_essenciais),})
+                                         'percentual_gastos_nao_essenciais': int(percentual_gastos_nao_essenciais),
+                                         'contas_vencidas_contagem': int(contas_vencidas_contagem),
+                                         'contas_proximas_contagem': int(contas_proximas_contagem),})
+
 
 def manage(request):
     contas = Conta.objects.all()
@@ -112,5 +136,7 @@ def dashboard(request):
 
     return render(request, 'dashboard.html', {'labels': list(dados.keys()), 
                                               'values': list(dados.values())})
+
+
 
 
