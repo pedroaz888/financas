@@ -19,6 +19,8 @@ DEBUG = True
 ALLOWED_HOSTS = ["*"]
 
 
+
+CSRF_TRUSTED_ORIGINS = ['https://financas-production-106f.up.railway.app']
 # Application definition
 
 INSTALLED_APPS = [
@@ -79,7 +81,7 @@ DATABASES = {
     'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': 'railway',
-            'USER': 'root',
+            'USER': 'postgres',
             'PASSWORD': 'AEeoGMVgehgac5Oe5MOP',
             'HOST':'containers-us-west-149.railway.app',
             'PORT':'6605',
