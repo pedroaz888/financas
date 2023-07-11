@@ -14,13 +14,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-=p==8izr#swe%kkk=59zvady)#ngi1o3w8co3322yi%+b9j@f^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
 
 
-CSRF_TRUSTED_ORIGINS = ['https://financas-production-106f.up.railway.app']
 # Application definition
 
 INSTALLED_APPS = [
@@ -35,6 +34,11 @@ INSTALLED_APPS = [
     'planejamento',
     'contas',
 ]
+
+
+
+CSRF_TRUSTED_ORIGINS = ['https://financas-production-106f.up.railway.app']
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -79,14 +83,15 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 DATABASES = {
     'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': 'railway',
-            'USER': 'postgres',
-            'PASSWORD': 'AEeoGMVgehgac5Oe5MOP',
-            'HOST':'containers-us-west-149.railway.app',
-            'PORT':'6605',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'railway',
+        'USER': 'postgres',
+        'PASSWORD': 'AEeoGMVgehgac5Oe5MOP',
+        'HOST': 'containers-us-west-149.railway.app',
+        'PORT': '6605',
+        
     }
-}
+} 
 
 
 # Password validation
