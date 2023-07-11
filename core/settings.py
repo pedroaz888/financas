@@ -138,7 +138,7 @@ MEDIA_URL = '/media/'
 
 STATICFILES_DIRS = [
 
-    "/finances/templates/static",
+    "/finances/static",
 
 ]
 
