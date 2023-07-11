@@ -88,7 +88,7 @@ def view_extrato(request):
 
     return render(request, 'view_extrato.html', {'valores': valores, 'contas': contas, 'categorias': categorias})
 
-def exportar_pdf(request):
+""" def exportar_pdf(request):
     valores = Valores.objects.filter(data__month=datetime.now().month)
     contas = Conta.objects.all()
     categorias = Categoria.objects.all()
@@ -101,5 +101,5 @@ def exportar_pdf(request):
 
     path_output.seek(0)
 
-    return FileResponse(path_output, filename="extrato.pdf")
+    return FileResponse(path_output, filename="extrato.pdf") """
 
