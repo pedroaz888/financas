@@ -7,8 +7,8 @@ from datetime import datetime, timedelta, date
 from django.template.loader import render_to_string
 import os
 from django.conf import settings
-from weasyprint import HTML
-from io import BytesIO
+#from weasyprint import HTML
+#from io import BytesIO
 from django.http import HttpResponse, FileResponse
 
 
