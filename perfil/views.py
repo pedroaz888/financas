@@ -34,10 +34,11 @@ def home(request):
     contas_paga = ContaPaga.objects.all()
 
     # Contas pagas no mês atual
-    contas_pagas_contagem = contas_paga.filter(data_pagamento__month=MES_ATUAL).count()
+    contas_pagas_contagem = contas_paga.filter(data_pagamento__month=MES_ATUAL)
   
-    contas_vencidas_contagem = contas_pagar.filter(dia_pagamento__lt=DIA_ATUAL).exclude(id__in=[contas_pagas_contagem]).count()
-    contas_proximas_contagem = contas_pagar.filter(dia_pagamento__lte=DIA_ATUAL + 5, dia_pagamento__gt=DIA_ATUAL).exclude(id__in=[contas_pagas_contagem]).count()
+    contas_vencidas_contagem = contas_pagar.filter(dia_pagamento__lt=DIA_ATUAL).exclude(id__in=[contas_pagas_contagem])
+    contas_proximas_contagem = contas_pagar.filter(dia_pagamento__lte=DIA_ATUAL + 5, dia_pagamento__gt=DIA_ATUAL).exclude(id__in=[contas_pagas_contagem])
+  
 
 
     return render(request, 'home.html', {'contas': contas, 
@@ -47,8 +48,13 @@ def home(request):
                                          'total_livre': total_livre,
                                          'percentual_gastos_essenciais': int(percentual_gastos_essenciais),
                                          'percentual_gastos_nao_essenciais': int(percentual_gastos_nao_essenciais),
-                                         'contas_vencidas_contagem': int(contas_vencidas_contagem),
-                                         'contas_proximas_contagem': int(contas_proximas_contagem),})
+                                         'contas_vencidas_contagem': contas_vencidas_contagem,
+                                         'contas_proximas_contagem': contas_proximas_contagem,})
+
+     
+                            
+
+
 
 
 def manage(request):

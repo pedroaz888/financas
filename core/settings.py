@@ -37,7 +37,7 @@ INSTALLED_APPS = [
 
 
 
-CSRF_TRUSTED_ORIGINS = ['https://financas-production-106f.up.railway.app']
+CSRF_TRUSTED_ORIGINS = ['uppity-weight-production.up.railway.app']
 
 
 MIDDLEWARE = [
@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'core.wsgi.application'
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
-} """ 
+}  """
 
 DATABASES = {
     'default': {
@@ -91,7 +91,7 @@ DATABASES = {
         'PORT': '6605',
         
     }
-}   
+} 
 
 
 # Password validation
